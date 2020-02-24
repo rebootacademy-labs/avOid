@@ -28,10 +28,10 @@ canvas.addEventListener("mousemove", function (e) {
   document.getElementById("demo").innerHTML = coor;
 
 // 2. Relacionar la posición del dot con puntero
-  dotLeft = canvasMouseX - 8;
-  dotTop = canvasMouseY - 8;
-  dotRight = dotLeft + 18;
-  dotBottom = dotTop + 18;
+  dotLeft = canvasMouseX - dot.offsetWidth / 2;
+  dotTop = canvasMouseY - dot.offsetHeight / 2;
+  dotRight = dotLeft + dot.offsetWidth;
+  dotBottom = dotTop + dot.offsetHeight;
   dot.style.left = dotLeft + "px";
   dot.style.top = dotTop + "px";
   dot.style.right = dotRight + "px";
@@ -47,13 +47,28 @@ canvas.addEventListener("mousemove", function (e) {
   // También podemos plantearlo sin calculos con un canvas.addEventListener("mouseleave", restartGame (e) )
 
 //COLISION
-  if(dotLeft < enemyLeft + 19   &&
-    dotTop < enemyTop + 19  &&
-    dotLeft + 19  > enemyLeft  &&
-    dotTop + 19 > enemyTop){
+/*
+//Cuadrada
+  if(dotLeft < enemyLeft + 18   &&
+    dotTop < enemyTop + 18  &&
+    dotLeft + 18  > enemyLeft  &&
+    dotTop + 18 > enemyTop){
       alert("LOSE");
     }
+*/
+//Circular
 
+    var sumRadios;
+    var x;
+    var y;
+  
+    sumRadios = dot.offsetWidth / 2 + enemy.offsetWidth / 2;
+    x = (dotLeft + (dot.offsetWidth / 2))  - (enemyLeft + (enemy.offsetWidth / 2));
+    y = (dotTop + (dot.offsetHeight / 2))  - (enemyTop + (enemy.offsetHeight / 2));
+  
+    if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+      console.log("BOOM!");
+    } 
 })
 
 //Necesitamos el boton START para establecer un setInterval para los niveles  y otro para la vida
@@ -61,4 +76,4 @@ canvas.addEventListener("mousemove", function (e) {
 //buttonStart.addEventListener("click", function (e){
 //    --//timerId = setInterval(function(){}, time)
 //})
-//clearInterval(timerId) when LOSE;
+//clearInterval(timerId) when LOSE
