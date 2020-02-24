@@ -46,3 +46,4 @@ function restartGame() {
 //    --//timerId = setInterval(function(){}, time)
 //})
 //clearInterval(timerId) when LOSE;
+JSON
