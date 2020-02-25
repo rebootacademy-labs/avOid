@@ -17,21 +17,6 @@ function MainDot (canvas, dot) {
       this.dotRight = this.dotLeft + this.dot.offsetWidth;
       this.dotBottom = this.dotTop + this.dot.offsetHeight;
 
-
-      //collision()
-    //   var enemyArray = document.querySelectorAll ('div.enemy');
-      
-    //  // that.collision = function(enemyArray) {
-    //     for(var i = 0; i < enemyArray.length - 1; i++){
-    //       var x = (dotLeft + (that.dot.offsetWidth / 2)) - (enemyLeft + (enemyArray[i].offsetWidth / 2));
-    //       var y = (dotTop + (that.dot.offsetHeight / 2)) - (enemyTop + (enemyArray[i].offsetHeight / 2));
-    //       var sumRadios = that.dot.offsetWidth / 2 + enemyArray[i].offsetWidth / 2;
-    //       if (sumRadios > Math.sqrt((x * x) + (y * y))) {
-    //         console.log("BOOM!");
-    //       }
-    //     }
-      //}
-
       this.dot.style.left = this.dotLeft + "px";
       this.dot.style.top = this.dotTop + "px";
       this.dot.style.right = this.dotRight + "px";
@@ -45,17 +30,6 @@ function MainDot (canvas, dot) {
       }
     }.bind(this))
   }
-/*
-  this.collision = function(enemyArray) {
-      var sumRadios = this.dot.offsetWidth / 2 + enemy[0].offsetWidth / 2;
-      var x = (dotLeft + (this.dot.offsetWidth / 2)) - (enemyLeft + (enemy[0].offsetWidth / 2));
-      var y = (dotTop + (this.dot.offsetHeight / 2)) - (enemyTop + (enemy[0].offsetHeight / 2));
-    
-      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
-        console.log("BOOM!");
-      }
-  }
-  */
 }
 
 function Enemy (speed) {
@@ -71,15 +45,24 @@ function Enemy (speed) {
   this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
     this.newEnemy.style.top = `${this.top}px`;
+
     let movement = setInterval(function () {
+      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
+      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
+      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+
+      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+        alert("BOOM!");
+      }
+
       this.top++
       this.newEnemy.style.top = `${this.top}px`;
-      if (MAth.abs(this.top - Math.round(newDot.dotTop)) < 10) {
-        alert('perdite ih')
+
+      if (this.top == 590) {
+        clearInterval(movement);
+        this.newEnemy.remove();
       }
-      if (MAth.abs(this.left - Math.round(newDot.dotLeft)) < 10) {
-        alert('perdite ih')
-      }
-    }.bind(this), 1);
+      
+    }.bind(this), speed);
   }
 }

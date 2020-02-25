@@ -1,6 +1,6 @@
 var totalSeconds= 0;
 var actualLevel = 1;
-
+var levelTime = 1;
 function setLevel() {
   actualLevel++;
   level.innerHTML = actualLevel;
@@ -23,9 +23,8 @@ const dot = document.getElementById("personaje");
 var newDot = new MainDot(canvas, dot)
 newDot.move()
 
-
 var randomEnemies = setInterval(() => {
-  var enemyDot = new Enemy()  
+  var enemyDot = new Enemy()
   enemyDot.move(newDot)
 }, 100);
 
