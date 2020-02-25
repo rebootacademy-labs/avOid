@@ -35,6 +35,8 @@ header h1 {
     height: 10px;
     background-color: whitesmoke;
     border-radius: 100%;
+    top:293px;
+    left:493px;
 }
 #demo{
     color: white;
@@ -45,6 +47,8 @@ header h1 {
     height: 8px;
     border-radius: 100%;
     background-color: red;
+    top:100px;
+    left:600px;
 }
 #timer{
     width: 100%;
