@@ -6,13 +6,13 @@ var dotTop; // Situamos al personaje en el eje Y
 var dotLeft; // Situamos al personaje en el eje X
 var dotBottom;
 var dotRight;
+var totalSeconds= 0;
+var actualLevel = 1;
+
 var enemyTop = 100;
 var enemyLeft = 600;
 var enemyBottom = 118;
 var enemyRight = 618;
-var totalSeconds= 0;
-var actualLevel = 1;
-
 
 function setLevel() {
   actualLevel++;
@@ -30,14 +30,6 @@ function setTime() {
 var timerSeconds = setInterval(() => {
   setTime();
 }, 1000);
-
-/*canvas.addEventListener("mouseover", function (e) {
-  document.getElementById("time").innerHTML = seconds + "s"
-  var timerId = setInterval(() => {
-    seconds++;
-  }, 1000);
-});*/
-
 
 
 //Al empezar el personaje no debería verse: display:none o visibility: hidden en css
@@ -118,6 +110,7 @@ function addEnemy() {
   movementEnemy.style.top = 0 + "px";
   let movement = setInterval(function () {
     movementEnemy.style.top = parseInt(movementEnemy.style.top.slice(0, movementEnemy.style.top.length - 2)) + 1 + "px";
+    movementEnemy.style.left += -1 + "px";
     if (movementEnemy.style.top == "590px") {
       clearInterval(movement);
       movementEnemy.remove();
@@ -127,6 +120,19 @@ function addEnemy() {
 var randomEnemies = setInterval(() => {
   addEnemy()
 }, 200);
+
+//FUNCIÓN CONSTRUCTORA
+
+function Enemy (enemyTop, enemyLeft, width, height, color){
+  this.enemyTop = enemyTop;
+  this.enemyLeft = enemyLeft;
+  this.width = width;
+  this.height = height;
+  this.color = color,
+  this.create = function(){};
+  this.move = function(){};
+}
+
 
 
 //Necesitamos el boton START para establecer un setInterval para los niveles  y otro para la vida
