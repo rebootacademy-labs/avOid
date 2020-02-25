@@ -23,9 +23,10 @@ const dot = document.getElementById("personaje");
 var newDot = new MainDot(canvas, dot)
 newDot.move()
 
+
 var randomEnemies = setInterval(() => {
   var enemyDot = new Enemy()  
-  enemyDot.move()
+  enemyDot.move(newDot)
 }, 100);
 
 

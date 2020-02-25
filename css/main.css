@@ -27,7 +27,7 @@ header h1 {
     background-color: #111111;
     border: 12px solid #333333;
     margin: auto;
-    cursor: none;
+    cursor: crosshair;
 }
 #personaje {
     position: absolute;
@@ -47,8 +47,6 @@ header h1 {
     height: 8px;
     border-radius: 100%;
     background-color: red;
-    top:100px;
-    left:600px;
 }
 #timer{
     width: 100%;

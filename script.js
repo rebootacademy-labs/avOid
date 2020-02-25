@@ -2,47 +2,48 @@ function MainDot (canvas, dot) {
   this.dot = dot;
   this.canvas = canvas;
   this.canvasPosition = this.canvas.getBoundingClientRect();
-  
-  this.move = function() {
-    var that = this
-    canvas.addEventListener("mousemove", function (e) {
-      var canvasMouseX = e.clientX - (that.canvasPosition.left + 12);
-      var canvasMouseY = e.clientY - (that.canvasPosition.top + 12);      
+  this.dotLeft;
+  this.dotTop;
+  this.dotRight;
+  this.dotBottom;
 
-      var dotLeft = canvasMouseX - that.dot.offsetWidth / 2;
-      var dotTop = canvasMouseY - that.dot.offsetHeight / 2;
-      var dotRight = dotLeft + that.dot.offsetWidth;
-      var dotBottom = dotTop + that.dot.offsetHeight;
+  this.move = function() {
+    canvas.addEventListener("mousemove", function (e) {
+      var canvasMouseX = e.clientX - (this.canvasPosition.left + 12);
+      var canvasMouseY = e.clientY - (this.canvasPosition.top + 12);      
+
+      this.dotLeft = canvasMouseX - this.dot.offsetWidth / 2;
+      this.dotTop = canvasMouseY - this.dot.offsetHeight / 2;
+      this.dotRight = this.dotLeft + this.dot.offsetWidth;
+      this.dotBottom = this.dotTop + this.dot.offsetHeight;
 
 
       //collision()
-      var moving = false;
-      var enemyArray = document.getElementsByClassName("enemy");
-      that.collision = function(enemyArray) {
-        if (!moving){
-          for(var i = 0; i < enemyArray.length - 1; i++){
-            var sumRadios = that.dot.offsetWidth / 2 + enemy[i].offsetWidth / 2;
-            var x = (dotLeft + (that.dot.offsetWidth / 2)) - (enemyLeft + (enemy[i].offsetWidth / 2));
-            var y = (dotTop + (that.dot.offsetHeight / 2)) - (enemyTop + (enemy[i].offsetHeight / 2));
-            if (sumRadios > Math.sqrt((x * x) + (y * y))) {
-              console.log("BOOM!");
-            }
-          }
-        }
-      }
+    //   var enemyArray = document.querySelectorAll ('div.enemy');
+      
+    //  // that.collision = function(enemyArray) {
+    //     for(var i = 0; i < enemyArray.length - 1; i++){
+    //       var x = (dotLeft + (that.dot.offsetWidth / 2)) - (enemyLeft + (enemyArray[i].offsetWidth / 2));
+    //       var y = (dotTop + (that.dot.offsetHeight / 2)) - (enemyTop + (enemyArray[i].offsetHeight / 2));
+    //       var sumRadios = that.dot.offsetWidth / 2 + enemyArray[i].offsetWidth / 2;
+    //       if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+    //         console.log("BOOM!");
+    //       }
+    //     }
+      //}
 
-      that.dot.style.left = dotLeft + "px";
-      that.dot.style.top = dotTop + "px";
-      that.dot.style.right = dotRight + "px";
-      that.dot.style.bottom = dotBottom + "px";
+      this.dot.style.left = this.dotLeft + "px";
+      this.dot.style.top = this.dotTop + "px";
+      this.dot.style.right = this.dotRight + "px";
+      this.dot.style.bottom = this.dotBottom + "px";
     
-      if (dotLeft <= 0 || dotRight == 1000) {
+      if (this.dotLeft <= 0 || this.dotRight == 1000) {
         console.log("U LOSE");
       }
-      if (dotTop <= 0 || dotBottom >= 600) {
+      if (this.dotTop <= 0 || this.dotBottom >= 600) {
         console.log("U LOSE");
       }
-    })
+    }.bind(this))
   }
 /*
   this.collision = function(enemyArray) {
@@ -59,22 +60,26 @@ function MainDot (canvas, dot) {
 
 function Enemy (speed) {
   this.speed = speed
+  this.top = 0;
+  this.left = Math.ceil(Math.random() * 995);
   this.newEnemy = document.createElement("div");
   this.wrapperEnemy = document.getElementById('wrapper-enemy')
 
-  this.newEnemy.style.left = Math.ceil(Math.random() * 995) + "px";
+  this.newEnemy.style.left = `${this.left}px`;
   this.newEnemy.classList.add("enemy");
 
-  this.move = function() {
+  this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
-    this.newEnemy.style.top = 0 + "px";
-    var that = this
+    this.newEnemy.style.top = `${this.top}px`;
     let movement = setInterval(function () {
-      that.newEnemy.style.top = parseInt(that.newEnemy.style.top.slice(0, that.newEnemy.style.top.length - 2)) + 1 + "px";
-      if (that.newEnemy.style.top == "590px") {
-        clearInterval(movement);
-        that.newEnemy.remove();
+      this.top++
+      this.newEnemy.style.top = `${this.top}px`;
+      if (MAth.abs(this.top - Math.round(newDot.dotTop)) < 10) {
+        alert('perdite ih')
       }
-    }, 1);
+      if (MAth.abs(this.left - Math.round(newDot.dotLeft)) < 10) {
+        alert('perdite ih')
+      }
+    }.bind(this), 1);
   }
 }
