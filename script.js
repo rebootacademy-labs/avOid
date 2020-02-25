@@ -14,7 +14,22 @@ function MainDot (canvas, dot) {
       var dotRight = dotLeft + that.dot.offsetWidth;
       var dotBottom = dotTop + that.dot.offsetHeight;
 
+
       //collision()
+      var moving = false;
+      var enemyArray = document.getElementsByClassName("enemy");
+      that.collision = function(enemyArray) {
+        if (!moving){
+          for(var i = 0; i < enemyArray.length - 1; i++){
+            var sumRadios = that.dot.offsetWidth / 2 + enemy[i].offsetWidth / 2;
+            var x = (dotLeft + (that.dot.offsetWidth / 2)) - (enemyLeft + (enemy[i].offsetWidth / 2));
+            var y = (dotTop + (that.dot.offsetHeight / 2)) - (enemyTop + (enemy[i].offsetHeight / 2));
+            if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+              console.log("BOOM!");
+            }
+          }
+        }
+      }
 
       that.dot.style.left = dotLeft + "px";
       that.dot.style.top = dotTop + "px";
