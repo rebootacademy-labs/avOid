@@ -36,7 +36,7 @@ function MainDot (canvas, dot) {
       var y = (dotTop + (this.dot.offsetHeight / 2)) - (enemyTop + (enemy[0].offsetHeight / 2));
     
       if (sumRadios > Math.sqrt((x * x) + (y * y))) {
-        console.log("BOOM!");
+        console.log("BOOM!sss");
       }
   }
   */
