@@ -127,5 +127,6 @@ function EnemyRight (speed) {
 
       
     }.bind(this), intervalChange);
+    
   }
 }
