@@ -6,6 +6,7 @@ function MainDot (canvas, dot) {
   this.dotTop;
   this.dotRight;
   this.dotBottom;
+  this.lifes = 2;
 
   this.move = function() {
     canvas.addEventListener("mousemove", function (e) {
@@ -30,13 +31,11 @@ function MainDot (canvas, dot) {
       }
     }.bind(this))
   }
-  this.life = function(){
-    
-  }
 }
 
 function EnemyTop (speed) {
-  this.speed = speed
+  this.actualLevel = actualLevel;
+  this.speed = speed;
   this.top = 0;
   this.left = Math.ceil(Math.random() * 1000);
   this.newEnemy = document.createElement("div");
@@ -50,13 +49,21 @@ function EnemyTop (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    let movement = setInterval(function () {
-      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
-      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
-      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+    var intervalChange = this.speed / ( this.myLevel + 0.3 );
 
-      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+    let movement = setInterval(function () {
+      if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
+        newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
+        newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
+        newDot.dotTop + 8 > this.newEnemy.offsetTop) {
         console.log("BOOM!");
+        this.newEnemy.remove();
+        if(newDot.lifes != 0){
+          newDot.lifes = newDot.lifes - 1;
+        }
+        else {
+          alert("LOSE ALL YOUR LIFES")
+        };
       }
 
       this.top += 2
@@ -68,12 +75,13 @@ function EnemyTop (speed) {
         this.newEnemy.remove();
       }
       
-    }.bind(this), 20);
+    }.bind(this), intervalChange);
   }
 }
 
 function EnemyRight (speed) {
-  this.speed = speed
+  this.actualLevel = actualLevel;
+  this.speed = speed;
   this.top = Math.ceil(Math.random() * 600);
   this.left = 992;
   this.newEnemy = document.createElement("div");
@@ -82,22 +90,32 @@ function EnemyRight (speed) {
   this.newEnemy.style.top = `${this.top}px`;
   this.newEnemy.classList.add("enemy");
 
+  this.myLevel;
+
   this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    let movement = setInterval(function () {
-      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
-      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
-      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+    var intervalChange = this.speed / ( this.myLevel + 0.3 );
 
-      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+    let movement = setInterval(function () {
+      if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
+        newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
+        newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
+        newDot.dotTop + 8 > this.newEnemy.offsetTop) {
         console.log("BOOM!");
+        this.newEnemy.remove();
+        if(newDot.lifes != 0){
+          newDot.lifes = newDot.lifes - 1;
+        }
+        else {
+          alert("LOSE ALL YOUR LIFES")
+        };
       }
 
-      this.top += 2
-      this.left += -3
+      this.top += 2;
+      this.left += -3;
       this.newEnemy.style.top = `${this.top}px`;
       this.newEnemy.style.left = `${this.left}px`
       if (this.top >= 590 || this.left <= 0) {
@@ -105,6 +123,6 @@ function EnemyRight (speed) {
         this.newEnemy.remove();
       }
       
-    }.bind(this), 20);
+    }.bind(this), intervalChange);
   }
 }

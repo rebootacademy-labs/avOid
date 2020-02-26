@@ -4,7 +4,7 @@ var totalSeconds= 0;
 var actualLevel = 1;
 
 function initiate () {
-  startButton.addEventListener("click", function(actualLevel, totalSeconds){
+  startButton.addEventListener("click", function(){
     startBackground.classList.add ("desactivate");
     startButton.classList.add ("desactivate");
 
@@ -40,15 +40,21 @@ var newDot = new MainDot(canvas, dot)
 newDot.move()
 
 var randomEnemiesTop = setInterval(() => {
-  var enemyDotTop = new EnemyTop()
+  var enemyDotTop = new EnemyTop(20)
+  enemyDotTop.myLevel = this.actualLevel;
   enemyDotTop.move(newDot)
-}, 280);
+}, 200);
 
-var randomEnemiesRight = setInterval(() => {
-  var enemyDotRight = new EnemyRight()
-  enemyDotRight.move(newDot)
-}, 280);
+var randomEnemiesRight = setInterval((() => {
+  var enemyDotRight = new EnemyRight(20);
+  enemyDotRight.myLevel = this.actualLevel;
+  enemyDotRight.move(newDot);
+
+}), 200);
+
 
 initiate();
+
+
 
 
