@@ -49,6 +49,6 @@ var randomEnemiesRight = setInterval(() => {
   enemyDotRight.move(newDot)
 }, 280);
 
-
+initiate();
 
 
