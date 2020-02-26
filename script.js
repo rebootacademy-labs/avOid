@@ -1,48 +1,68 @@
-// SECTION HTML
+function MainDot (canvas, dot) {
+  this.dot = dot;
+  this.canvas = canvas;
+  this.canvasPosition = this.canvas.getBoundingClientRect();
+  this.dotLeft;
+  this.dotTop;
+  this.dotRight;
+  this.dotBottom;
 
-const canvas = document.getElementById("canvas");
-var canvasPosition = canvas.getBoundingClientRect() // Nos indica la posición de top,left,rigth y bottom del canvas
-const dot = document.getElementById("personaje");
-var dotTop = 275; // Situamos al personaje en el eje Y
-var dotLeft = 475; // Situamos al personaje en el eje X
+  this.move = function() {
+    canvas.addEventListener("mousemove", function (e) {
+      var canvasMouseX = e.clientX - (this.canvasPosition.left + 12);
+      var canvasMouseY = e.clientY - (this.canvasPosition.top + 12);      
 
-//Al empezar el personaje no debería verse: display:none o visibility: hidden en css
-//Cuando pulsas el botón start aparece:
-//const buttonStart = document.getElementById("id");
-//buttonStart.addEventListener("click", function (e){
-//    --//Cambiar estado personaje en Css
-//})
+      this.dotLeft = canvasMouseX - this.dot.offsetWidth / 2;
+      this.dotTop = canvasMouseY - this.dot.offsetHeight / 2;
+      this.dotRight = this.dotLeft + this.dot.offsetWidth;
+      this.dotBottom = this.dotTop + this.dot.offsetHeight;
 
-// MOVIMIENTO DEL PERSONAJE:
-
-// 1.Ver coordenadas del puntero
-canvas.addEventListener("mousemove", function (e) {
-    var mousePositionX = e.clientX - (canvasPosition.left + 8);
-    var mousePositionY = e.clientY - (canvasPosition.top + 8);
-    var coor = "Coordinates: (" + mousePositionX + "," + mousePositionY + ")";
-    document.getElementById("demo").innerHTML = coor;
-
-// 2. Relacionar la posición del dot con puntero
-    dot.style.left = mousePositionX - 8 + "px";
-    dot.style.top = mousePositionY - 8 + "px";
-
-// 3. Alerta LOSE
-    if (e.clientX <= canvasPosition.left || e.clientX >= canvasPosition.right) {
+      this.dot.style.left = this.dotLeft + "px";
+      this.dot.style.top = this.dotTop + "px";
+      this.dot.style.right = this.dotRight + "px";
+      this.dot.style.bottom = this.dotBottom + "px";
+    
+      if (this.dotLeft <= 0 || this.dotRight == 1000) {
         console.log("U LOSE");
-    }
-    if (e.clientY <= canvasPosition.top || e.clientY >= canvasPosition.bottom) {
+      }
+      if (this.dotTop <= 0 || this.dotBottom >= 600) {
         console.log("U LOSE");
-    }
-   //.addEventListener("mouseleave", restartGame (e) )
-})
-
-function restartGame() {
-    alert("U LOSE");
+      }
+    }.bind(this))
+  }
 }
 
-//Necesitamos el boton START para establecer un setInterval para los niveles  y otro para la vida
-//const buttonStart = document.getElementById("id");
-//buttonStart.addEventListener("click", function (e){
-//    --//timerId = setInterval(function(){}, time)
-//})
-//clearInterval(timerId) when LOSE;
+function Enemy (speed) {
+  this.speed = speed
+  this.top = 0;
+  this.left = Math.ceil(Math.random() * 995);
+  this.newEnemy = document.createElement("div");
+  this.wrapperEnemy = document.getElementById('wrapper-enemy')
+
+  this.newEnemy.style.left = `${this.left}px`;
+  this.newEnemy.classList.add("enemy");
+
+  this.move = function(newDot) {
+    this.wrapperEnemy.appendChild(this.newEnemy);
+    this.newEnemy.style.top = `${this.top}px`;
+
+    let movement = setInterval(function () {
+      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
+      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
+      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+
+      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+        alert("BOOM!");
+      }
+
+      this.top++
+      this.newEnemy.style.top = `${this.top}px`;
+
+      if (this.top == 590) {
+        clearInterval(movement);
+        this.newEnemy.remove();
+      }
+      
+    }.bind(this), speed);
+  }
+}
