@@ -30,12 +30,15 @@ function MainDot (canvas, dot) {
       }
     }.bind(this))
   }
+  this.life = function(){
+    
+  }
 }
 
-function Enemy (speed) {
+function EnemyTop (speed) {
   this.speed = speed
   this.top = 0;
-  this.left = Math.ceil(Math.random() * 995);
+  this.left = Math.ceil(Math.random() * 1000);
   this.newEnemy = document.createElement("div");
   this.wrapperEnemy = document.getElementById('wrapper-enemy')
 
@@ -45,6 +48,7 @@ function Enemy (speed) {
   this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
     this.newEnemy.style.top = `${this.top}px`;
+    this.newEnemy.style.left = `${this.left}px`;
 
     let movement = setInterval(function () {
       var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
@@ -52,17 +56,55 @@ function Enemy (speed) {
       var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
 
       if (sumRadios > Math.sqrt((x * x) + (y * y))) {
-        alert("BOOM!");
+        console.log("BOOM!");
       }
 
-      this.top++
+      this.top += 2
+      this.left += -3
       this.newEnemy.style.top = `${this.top}px`;
-
-      if (this.top == 590) {
+      this.newEnemy.style.left = `${this.left}px`
+      if (this.top >= 590 || this.left <= 0) {
         clearInterval(movement);
         this.newEnemy.remove();
       }
       
-    }.bind(this), speed);
+    }.bind(this), 20);
+  }
+}
+
+function EnemyRight (speed) {
+  this.speed = speed
+  this.top = Math.ceil(Math.random() * 600);
+  this.left = 992;
+  this.newEnemy = document.createElement("div");
+  this.wrapperEnemy = document.getElementById('wrapper-enemy')
+
+  this.newEnemy.style.top = `${this.top}px`;
+  this.newEnemy.classList.add("enemy");
+
+  this.move = function(newDot) {
+    this.wrapperEnemy.appendChild(this.newEnemy);
+    this.newEnemy.style.top = `${this.top}px`;
+    this.newEnemy.style.left = `${this.left}px`;
+
+    let movement = setInterval(function () {
+      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
+      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
+      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+
+      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+        console.log("BOOM!");
+      }
+
+      this.top += 2
+      this.left += -3
+      this.newEnemy.style.top = `${this.top}px`;
+      this.newEnemy.style.left = `${this.left}px`
+      if (this.top >= 590 || this.left <= 0) {
+        clearInterval(movement);
+        this.newEnemy.remove();
+      }
+      
+    }.bind(this), 20);
   }
 }
