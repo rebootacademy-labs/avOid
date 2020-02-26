@@ -18,7 +18,7 @@ function initiate () {
     }
     var timerLevel = setInterval(() => {
       setLevel();
-    }, 20000)
+    }, 10000)
     
     function setTime() {
       totalSeconds++;

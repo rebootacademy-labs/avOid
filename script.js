@@ -85,7 +85,7 @@ function EnemyRight (speed) {
   this.top = Math.ceil(Math.random() * 600);
   this.left = 992;
   this.newEnemy = document.createElement("div");
-  this.wrapperEnemy = document.getElementById('wrapper-enemy')
+  this.wrapperEnemy = document.getElementById('wrapper-enemy');
 
   this.newEnemy.style.top = `${this.top}px`;
   this.newEnemy.classList.add("enemy");
@@ -122,6 +122,7 @@ function EnemyRight (speed) {
         clearInterval(movement);
         this.newEnemy.remove();
       }
+
       
     }.bind(this), intervalChange);
   }
