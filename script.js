@@ -2,64 +2,109 @@ function MainDot (canvas, dot) {
   this.dot = dot;
   this.canvas = canvas;
   this.canvasPosition = this.canvas.getBoundingClientRect();
-  
+  this.dotLeft;
+  this.dotTop;
+  this.dotRight;
+  this.dotBottom;
+
   this.move = function() {
-    var that = this
     canvas.addEventListener("mousemove", function (e) {
-      var canvasMouseX = e.clientX - (that.canvasPosition.left + 12);
-      var canvasMouseY = e.clientY - (that.canvasPosition.top + 12);      
+      var canvasMouseX = e.clientX - (this.canvasPosition.left + 12);
+      var canvasMouseY = e.clientY - (this.canvasPosition.top + 12);      
 
-      var dotLeft = canvasMouseX - that.dot.offsetWidth / 2;
-      var dotTop = canvasMouseY - that.dot.offsetHeight / 2;
-      var dotRight = dotLeft + that.dot.offsetWidth;
-      var dotBottom = dotTop + that.dot.offsetHeight;
+      this.dotLeft = canvasMouseX - this.dot.offsetWidth / 2;
+      this.dotTop = canvasMouseY - this.dot.offsetHeight / 2;
+      this.dotRight = this.dotLeft + this.dot.offsetWidth;
+      this.dotBottom = this.dotTop + this.dot.offsetHeight;
 
-      //collision()
-
-      that.dot.style.left = dotLeft + "px";
-      that.dot.style.top = dotTop + "px";
-      that.dot.style.right = dotRight + "px";
-      that.dot.style.bottom = dotBottom + "px";
+      this.dot.style.left = this.dotLeft + "px";
+      this.dot.style.top = this.dotTop + "px";
+      this.dot.style.right = this.dotRight + "px";
+      this.dot.style.bottom = this.dotBottom + "px";
     
-      if (dotLeft <= 0 || dotRight == 1000) {
+      if (this.dotLeft <= 0 || this.dotRight == 1000) {
         console.log("U LOSE");
       }
-      if (dotTop <= 0 || dotBottom >= 600) {
+      if (this.dotTop <= 0 || this.dotBottom >= 600) {
         console.log("U LOSE");
       }
-    })
+    }.bind(this))
   }
-/*
-  this.collision = function(enemyArray) {
-      var sumRadios = this.dot.offsetWidth / 2 + enemy[0].offsetWidth / 2;
-      var x = (dotLeft + (this.dot.offsetWidth / 2)) - (enemyLeft + (enemy[0].offsetWidth / 2));
-      var y = (dotTop + (this.dot.offsetHeight / 2)) - (enemyTop + (enemy[0].offsetHeight / 2));
+  this.life = function(){
     
-      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
-        console.log("BOOM!sss");
-      }
   }
-  */
 }
 
-function Enemy (speed) {
+function EnemyTop (speed) {
   this.speed = speed
+  this.top = 0;
+  this.left = Math.ceil(Math.random() * 1000);
   this.newEnemy = document.createElement("div");
   this.wrapperEnemy = document.getElementById('wrapper-enemy')
 
-  this.newEnemy.style.left = Math.ceil(Math.random() * 995) + "px";
+  this.newEnemy.style.left = `${this.left}px`;
   this.newEnemy.classList.add("enemy");
 
-  this.move = function() {
+  this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
-    this.newEnemy.style.top = 0 + "px";
-    var that = this
+    this.newEnemy.style.top = `${this.top}px`;
+    this.newEnemy.style.left = `${this.left}px`;
+
     let movement = setInterval(function () {
-      that.newEnemy.style.top = parseInt(that.newEnemy.style.top.slice(0, that.newEnemy.style.top.length - 2)) + 1 + "px";
-      if (that.newEnemy.style.top == "590px") {
-        clearInterval(movement);
-        that.newEnemy.remove();
+      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
+      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
+      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+
+      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+        console.log("BOOM!sss");
       }
-    }, 1);
+
+      this.top += 2
+      this.left += -3
+      this.newEnemy.style.top = `${this.top}px`;
+      this.newEnemy.style.left = `${this.left}px`
+      if (this.top >= 590 || this.left <= 0) {
+        clearInterval(movement);
+        this.newEnemy.remove();
+      }
+      
+    }.bind(this), 20);
+  }
+}
+
+function EnemyRight (speed) {
+  this.speed = speed
+  this.top = Math.ceil(Math.random() * 600);
+  this.left = 992;
+  this.newEnemy = document.createElement("div");
+  this.wrapperEnemy = document.getElementById('wrapper-enemy')
+
+  this.newEnemy.style.top = `${this.top}px`;
+  this.newEnemy.classList.add("enemy");
+
+  this.move = function(newDot) {
+    this.wrapperEnemy.appendChild(this.newEnemy);
+    this.newEnemy.style.top = `${this.top}px`;
+    this.newEnemy.style.left = `${this.left}px`;
+
+    let movement = setInterval(function () {
+      var x = (newDot.dotLeft + (newDot.dot.offsetWidth / 2)) - (this.newEnemy.offsetLeft + (this.newEnemy.offsetWidth / 2));
+      var y = (newDot.dotTop + (newDot.dot.offsetHeight / 2)) - (this.newEnemy.offsetTop + (this.newEnemy.offsetHeight / 2));
+      var sumRadios = newDot.dot.offsetWidth / 2 + this.newEnemy.offsetWidth / 2;
+
+      if (sumRadios > Math.sqrt((x * x) + (y * y))) {
+        console.log("BOOM!");
+      }
+
+      this.top += 2
+      this.left += -3
+      this.newEnemy.style.top = `${this.top}px`;
+      this.newEnemy.style.left = `${this.left}px`
+      if (this.top >= 590 || this.left <= 0) {
+        clearInterval(movement);
+        this.newEnemy.remove();
+      }
+      
+    }.bind(this), 20);
   }
 }
