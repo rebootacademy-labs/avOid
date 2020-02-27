@@ -110,10 +110,10 @@ function EnemyRight (speed) {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
         newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
         newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
-        newDot.dotTop + 8 > this.newEnemy.offsetTop) {
+        newDot.dotTop + 8 > this.newEnemy.offsetTop) {SVGPathSegCurvetoQuadraticRel
         
         this.newEnemy.remove();
-        if(newDot.lifes > 1){
+        if(newDot.lifes > 0){
           newDot.lifes--;
           life.innerHTML = newDot.lifes;
         }
