@@ -14,11 +14,14 @@ function initiate () {
 
     function setLevel() {
       actualLevel++;
+      if(actualLevel > 10){
+        actualLevel = 10;
+      }
       level.innerHTML = actualLevel;
     }
     var timerLevel = setInterval(() => {
       setLevel();
-    }, 10000)
+    }, 12000)
     
     function setTime() {
       totalSeconds++;
@@ -43,14 +46,14 @@ var randomEnemiesTop = setInterval(() => {
   var enemyDotTop = new EnemyTop(20)
   enemyDotTop.myLevel = this.actualLevel;
   enemyDotTop.move(newDot)
-}, 200);
+}, 300 / actualLevel);
 
 var randomEnemiesRight = setInterval((() => {
   var enemyDotRight = new EnemyRight(20);
   enemyDotRight.myLevel = this.actualLevel;
   enemyDotRight.move(newDot);
 
-}), 200);
+}), 300 / actualLevel);
 
 
 initiate();

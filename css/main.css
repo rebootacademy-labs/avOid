@@ -94,4 +94,5 @@ button:hover{
 }
 .desactivate {
     display:none;
+    transition: all 10s ease;
 }

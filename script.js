@@ -49,7 +49,7 @@ function EnemyTop (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    var intervalChange = this.speed / ( this.myLevel + 0.3 );
+    var intervalChange = this.speed / ( this.myLevel * 0.5 );
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
@@ -62,7 +62,12 @@ function EnemyTop (speed) {
           newDot.lifes = newDot.lifes - 1;
         }
         else {
-          alert("LOSE ALL YOUR LIFES")
+          button.classList.remove ("desactivate");
+          newDot.dot.remove();
+          startBackground.classList.remove ("desactivate");
+          dot.classList.add ("desactivate");
+          wrapper.classList.add("desactivate");
+          timerInfo.classList.add("desactivate");
         };
       }
 
@@ -97,7 +102,7 @@ function EnemyRight (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    var intervalChange = this.speed / ( this.myLevel + 0.3 );
+    var intervalChange = this.speed / ( this.myLevel * 0.7 );
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
@@ -111,6 +116,7 @@ function EnemyRight (speed) {
         }
         else {
           alert("LOSE ALL YOUR LIFES")
+          location.reload();
         };
       }
 
