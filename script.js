@@ -64,7 +64,7 @@ function EnemyTop (speed) {
     this.newEnemy.style.left = `${this.left}px`;
 
 
-    var intervalChange = this.speed - (this.actualLevel + 1);
+    var intervalChange = this.speed - (this.actualLevel + 6);
 
 
     let movement = setInterval(function () {
@@ -120,7 +120,7 @@ function EnemyRight (speed) {
     this.newEnemy.style.left = `${this.left}px`;
 
 
-    var intervalChange = this.speed - (this.actualLevel + 1) ;
+    var intervalChange = this.speed - (this.actualLevel + 6) ;
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
