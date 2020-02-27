@@ -1,3 +1,5 @@
+var loseButton = document.getElementById("lose");
+
 function MainDot (canvas, dot) {
   this.dot = dot;
   this.canvas = canvas;
@@ -25,11 +27,21 @@ function MainDot (canvas, dot) {
       this.dot.style.right = this.dotRight + "px";
       this.dot.style.bottom = this.dotBottom + "px";
     
-      if (this.dotLeft <= 0 || this.dotRight == 1000) {
-        console.log("U LOSE");
+      if (this.dotLeft <= 0 || this.dotRight >=1000 ) {
+        lose.classList.remove("desactivate");
+        startBackground.classList.remove("desactivate");
+        dot.classList.add("desactivate");
+        loseButton.addEventListener ("click", function(){
+          location.reload()
+        })
       }
       if (this.dotTop <= 0 || this.dotBottom >= 600) {
-        console.log("U LOSE");
+        lose.classList.remove("desactivate");
+        startBackground.classList.remove("desactivate");
+        dot.classList.add("desactivate");
+        loseButton.addEventListener ("click", function(){
+          location.reload()
+        })
       }
     }.bind(this))
   }
@@ -68,8 +80,12 @@ function EnemyTop (speed) {
         }
 
         if(newDot.lifes == 0) {
-          lose.classList.remove("desactivate");  
+          lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
+          dot.classList.add("desactivate");
+          loseButton.addEventListener ("click", function(){
+            location.reload()
+          })
         };
       }
 
@@ -110,7 +126,7 @@ function EnemyRight (speed) {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
         newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
         newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
-        newDot.dotTop + 8 > this.newEnemy.offsetTop) {SVGPathSegCurvetoQuadraticRel
+        newDot.dotTop + 8 > this.newEnemy.offsetTop) {
         
         this.newEnemy.remove();
         if(newDot.lifes > 0){
@@ -121,6 +137,10 @@ function EnemyRight (speed) {
         if(newDot.lifes == 0){   
         lose.classList.remove("desactivate");
         startBackground.classList.remove("desactivate");
+        dot.classList.add("desactivate");
+        loseButton.addEventListener ("click", function(){
+          location.reload()
+        })
         };
       }
 
