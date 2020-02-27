@@ -6,7 +6,9 @@ function MainDot (canvas, dot) {
   this.dotTop;
   this.dotRight;
   this.dotBottom;
-  this.lifes = 2;
+  this.lifes = 3;
+
+  
 
   this.move = function() {
     canvas.addEventListener("mousemove", function (e) {
@@ -56,13 +58,15 @@ function EnemyTop (speed) {
         newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
         newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
         newDot.dotTop + 8 > this.newEnemy.offsetTop) {
-        console.log("BOOM!");
+        
         this.newEnemy.remove();
-        if(newDot.lifes != 0){
-          newDot.lifes = newDot.lifes - 1;
+        if(newDot.lifes > 0){
+          newDot.lifes--;
+          life.innerHTML = newDot.lifes;
         }
-        else {
-          alert("LOSE ALL YOUR LIFES")
+        if(newDot.lifes == 0) {
+          lose.classList.remove("desactivate");  
+          startBackground.classList.remove("desactivate");
         };
       }
 
@@ -104,13 +108,15 @@ function EnemyRight (speed) {
         newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
         newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
         newDot.dotTop + 8 > this.newEnemy.offsetTop) {
-        console.log("BOOM!");
+        
         this.newEnemy.remove();
-        if(newDot.lifes != 0){
-          newDot.lifes = newDot.lifes - 1;
+        if(newDot.lifes > 1){
+          newDot.lifes--;
+          life.innerHTML = newDot.lifes;
         }
-        else {
-          alert("LOSE ALL YOUR LIFES")
+        if(newDot.lifes == 0){   
+        lose.classList.remove("desactivate");
+        startBackground.classList.remove("desactivate");
         };
       }
 

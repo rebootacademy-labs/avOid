@@ -1,14 +1,15 @@
 var startButton = document.getElementById("start");
 var startBackground = document.getElementById("menu");
-var totalSeconds= 0;
+var totalSeconds = 0;
 var actualLevel = 1;
 
-function initiate () {
-  startButton.addEventListener("click", function(){
-    startBackground.classList.add ("desactivate");
-    startButton.classList.add ("desactivate");
 
-    dot.classList.remove ("desactivate");
+function initiate() {
+  startButton.addEventListener("click", function () {
+    startBackground.classList.add("desactivate");
+    startButton.classList.add("desactivate");
+
+    dot.classList.remove("desactivate");
     wrapper.classList.remove("desactivate");
     timerInfo.classList.remove("desactivate");
 
@@ -19,7 +20,7 @@ function initiate () {
     var timerLevel = setInterval(() => {
       setLevel();
     }, 10000)
-    
+
     function setTime() {
       totalSeconds++;
       time.innerHTML = totalSeconds + "s";
