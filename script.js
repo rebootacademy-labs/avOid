@@ -51,7 +51,7 @@ function EnemyTop (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    var intervalChange = this.speed / ( this.myLevel + 0.3 );
+    var intervalChange = this.speed - (this.actualLevel + 1);
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
@@ -94,14 +94,13 @@ function EnemyRight (speed) {
   this.newEnemy.style.top = `${this.top}px`;
   this.newEnemy.classList.add("enemy");
 
-  this.myLevel;
 
   this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    var intervalChange = this.speed / ( this.myLevel + 0.3 );
+    var intervalChange = this.speed - (this.actualLevel + 1) ;
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
