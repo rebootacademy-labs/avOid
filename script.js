@@ -6,7 +6,9 @@ function MainDot (canvas, dot) {
   this.dotTop;
   this.dotRight;
   this.dotBottom;
-  this.lifes = 2;
+  this.lifes = 3;
+
+  
 
   this.move = function() {
     canvas.addEventListener("mousemove", function (e) {
@@ -49,25 +51,25 @@ function EnemyTop (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    var intervalChange = this.speed / ( this.myLevel * 0.5 );
+
+    var intervalChange = this.speed - (this.actualLevel + 1);
+
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
         newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
         newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
         newDot.dotTop + 8 > this.newEnemy.offsetTop) {
-        console.log("BOOM!");
+        
         this.newEnemy.remove();
-        if(newDot.lifes != 0){
-          newDot.lifes = newDot.lifes - 1;
+        if(newDot.lifes > 0){
+          newDot.lifes--;
+          life.innerHTML = newDot.lifes;
         }
-        else {
-          button.classList.remove ("desactivate");
-          newDot.dot.remove();
-          startBackground.classList.remove ("desactivate");
-          dot.classList.add ("desactivate");
-          wrapper.classList.add("desactivate");
-          timerInfo.classList.add("desactivate");
+
+        if(newDot.lifes == 0) {
+          lose.classList.remove("desactivate");  
+          startBackground.classList.remove("desactivate");
         };
       }
 
@@ -95,28 +97,30 @@ function EnemyRight (speed) {
   this.newEnemy.style.top = `${this.top}px`;
   this.newEnemy.classList.add("enemy");
 
-  this.myLevel;
 
   this.move = function(newDot) {
     this.wrapperEnemy.appendChild(this.newEnemy);
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-    var intervalChange = this.speed / ( this.myLevel * 0.7 );
+
+    var intervalChange = this.speed - (this.actualLevel + 1) ;
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
         newDot.dotTop < this.newEnemy.offsetTop + 6  &&	
         newDot.dotLeft + 8  > this.newEnemy.offsetLeft  &&	
         newDot.dotTop + 8 > this.newEnemy.offsetTop) {
-        console.log("BOOM!");
+        
         this.newEnemy.remove();
-        if(newDot.lifes != 0){
-          newDot.lifes = newDot.lifes - 1;
+        if(newDot.lifes > 1){
+          newDot.lifes--;
+          life.innerHTML = newDot.lifes;
         }
-        else {
-          alert("LOSE ALL YOUR LIFES")
-          location.reload();
+
+        if(newDot.lifes == 0){   
+        lose.classList.remove("desactivate");
+        startBackground.classList.remove("desactivate");
         };
       }
 
