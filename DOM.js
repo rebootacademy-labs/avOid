@@ -15,6 +15,9 @@ function initiate() {
 
     function setLevel() {
       actualLevel++;
+      if(actualLevel > 10){
+        actualLevel = 10;
+      }
       level.innerHTML = actualLevel;
       
     }
@@ -49,7 +52,7 @@ var randomEnemiesTop = setInterval(() => {
   var enemyDotTop = new EnemyTop(20)
   enemyDotTop.myLevel = this.actualLevel;
   enemyDotTop.move(newDot)
-}, 200);
+}, 300 / actualLevel);
 
 //var timeGenerator = 200;
 //var moreEnemies = timeGenerator / this.actualLevel;
@@ -58,7 +61,7 @@ var randomEnemiesRight = setInterval((() => {
   enemyDotRight.myLevel = this.actualLevel;
   enemyDotRight.move(newDot);
 
-}), 200);
+}), 300 / actualLevel);
 
 
 initiate();

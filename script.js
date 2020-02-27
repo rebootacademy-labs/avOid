@@ -51,7 +51,9 @@ function EnemyTop (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
+
     var intervalChange = this.speed - (this.actualLevel + 1);
+
 
     let movement = setInterval(function () {
       if (newDot.dotLeft < this.newEnemy.offsetLeft + 6   &&	
@@ -64,6 +66,7 @@ function EnemyTop (speed) {
           newDot.lifes--;
           life.innerHTML = newDot.lifes;
         }
+
         if(newDot.lifes == 0) {
           lose.classList.remove("desactivate");  
           startBackground.classList.remove("desactivate");
@@ -100,6 +103,7 @@ function EnemyRight (speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
+
     var intervalChange = this.speed - (this.actualLevel + 1) ;
 
     let movement = setInterval(function () {
@@ -113,6 +117,7 @@ function EnemyRight (speed) {
           newDot.lifes--;
           life.innerHTML = newDot.lifes;
         }
+
         if(newDot.lifes == 0){   
         lose.classList.remove("desactivate");
         startBackground.classList.remove("desactivate");
