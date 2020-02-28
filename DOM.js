@@ -1,5 +1,6 @@
 var newDot = null;
 
+music();
 startButton.addEventListener("click", function () {
   //newDot = true;
   newDot = new MainDot(canvas, dot);
@@ -8,7 +9,6 @@ startButton.addEventListener("click", function () {
   startBackground.classList.add("desactivate");
   startButton.classList.add("desactivate");
 
-  music();
   dot.classList.remove("desactivate");
   wrapper.classList.remove("desactivate");
   timerInfo.classList.remove("desactivate");
@@ -35,9 +35,9 @@ var dotsGeneration = function (myLevel) {
 timerId = dotsGeneration(actualLevel);
 
 var randomColorBoost = setInterval((() => {
-  var boostTop = new BoostTop(["green", "blue", "purple"]);
+  var boostTop = new BoostTop(["green", "blue"]);
   boostTop.move(newDot);
 
-  var boostRight = new BoostRight(["green", "blue", "purple"]);
+  var boostRight = new BoostRight(["green", "blue"]);
   boostRight.move(newDot);
 }), 5000);

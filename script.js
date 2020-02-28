@@ -18,21 +18,53 @@ function setLevel() {
   timerId = dotsGeneration(actualLevel);
 
   if (actualLevel > 10) {
-    actualLevel = 10;
+    this.actualLevel = 10;
+    //clearInterval(timerId);
   }
   level.innerHTML = actualLevel;
 
 }
 
-function setTime() {
-  totalSeconds++;
+function setTime(timerSeconds) {
+  if (this.lifes == 0) {
+    //this.totalSeconds = totalSeconds;
+    clearInterval(timerSeconds);
+  } else {
+    totalSeconds++;
+  }
+
   time.innerHTML = totalSeconds;
 }
 
 function music() {
-  var startAudio = new Audio("./music/music.mp3")
+  var startAudio = new Audio("./music/music1.mp3")
+  startAudio.volume = 0.3;
   startAudio.loop = true;
   startAudio.play();
+}
+function shieldSound() {
+  var shieldAudio = new Audio("./music/spaceship-escudo.wav")
+  shieldAudio.volume = 0.1;
+  //shieldAudio.loop = true;
+  shieldAudio.play();
+}
+function lifeUpSound() {
+  var lifeUpAudio = new Audio("./music/spaceship-lifeup.wav")
+  lifeUpAudio.volume = 0.3;
+  //shieldAudio.loop = true;
+  lifeUpAudio.play();
+}
+function hitSound() {
+  var hitAudio = new Audio("./music/spaceship-life-down.wav")
+  hitAudio.volume = 0.05;
+  //shieldAudio.loop = true;
+  hitAudio.play();
+}
+function loseSound() {
+  var offAudio = new Audio("./music/spaceship-off.wav")
+  offAudio.volume = 0.05;
+  //shieldAudio.loop = true;
+  offAudio.play();
 }
 
 function MainDot(canvas, dot) {
@@ -60,8 +92,11 @@ function MainDot(canvas, dot) {
       this.dot.style.top = this.dotTop + "px";
       this.dot.style.right = this.dotRight + "px";
       this.dot.style.bottom = this.dotBottom + "px";
-
+      //that = this;
       if (this.dotLeft <= 0 || this.dotRight >= 1000) {
+        loseSound();
+        this.lifes = 0;
+        life.innerHTML = this.lifes;
         lose.classList.remove("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
@@ -72,6 +107,9 @@ function MainDot(canvas, dot) {
         })
       }
       if (this.dotTop <= 0 || this.dotBottom >= 600) {
+        loseSound();
+        this.lifes = 0;
+        life.innerHTML = this.lifes;
         lose.classList.remove("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
@@ -109,11 +147,17 @@ function EnemyTop(speed) {
 
         this.newEnemy.remove();
         if (newDot.lifes > 0) {
-          if (!newDot.boost) { newDot.lifes--; }
+          if (!newDot.boost) {
+            newDot.lifes--;
+            hitSound();
+          }
           life.innerHTML = newDot.lifes;
         }
 
         if (newDot.lifes == 0) {
+          loseSound();
+          totalSeconds = clearInterval(totalSeconds);
+    
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
@@ -121,6 +165,7 @@ function EnemyTop(speed) {
           loseButton.addEventListener("click", function () {
             location.reload()
           })
+
         };
       }
 
@@ -167,10 +212,12 @@ function EnemyRight(speed) {
         this.newEnemy.remove();
         if (newDot.lifes > 0) {
           newDot.lifes--;
-          life.innerHTML = newDot.lifes;
+          hitSound();
         }
+        life.innerHTML = newDot.lifes;
 
         if (newDot.lifes == 0) {
+          loseSound();
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
@@ -201,7 +248,7 @@ function BoostTop(colors) {
   this.left = Math.ceil(Math.random() * 1000);
   this.newBoost = document.createElement("div");
   this.wrapperEnemy = document.getElementById('wrapper-enemy')
-  const randomColor = Math.floor(Math.random() * 3);
+  const randomColor = Math.floor(Math.random() * 2);
 
   this.newBoost.style.left = `${this.left}px`;
   this.newBoost.classList.add(colors[randomColor]);
@@ -254,7 +301,7 @@ function BoostRight(colors) {
   this.left = 992;
   this.newBoost = document.createElement("div");
   this.wrapperEnemy = document.getElementById('wrapper-enemy')
-  const randomColor = Math.floor(Math.random() * 3);
+  const randomColor = Math.floor(Math.random() * 2);
 
   this.newBoost.style.left = `${this.left}px`;
   this.newBoost.classList.add(colors[randomColor]);
@@ -304,12 +351,14 @@ function BoostRight(colors) {
 function greenLife() {
   if (newDot.lifes > 0) {
     newDot.lifes++;
+    lifeUpSound();
     life.innerHTML = newDot.lifes;
   }
 }
 
 function blueShield() {
   newDot.dot.classList.add("dotblue");
+  shieldSound();
   newDot.boost = true;
   //newDot = false;
   //newDot.move();
@@ -317,9 +366,9 @@ function blueShield() {
     newDot.dot.classList.remove("dotblue")
     newDot.boost = false;
     // newDot = true;
-  }, 4000)
+  }, 5000)
 }
-
+/*
 function purpleGravity() {
   newDot.dot.classList.add("dotpurple");
 
@@ -329,4 +378,4 @@ function purpleGravity() {
     newDot.dot.classList.remove("dotpurple")
     //  newDot = true;
   }, 6000)
-}
+}*/
