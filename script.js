@@ -45,8 +45,6 @@ function MainDot(canvas, dot) {
   this.dotRight;
   this.dotBottom;
   this.lifes = 3;
-  this.onGame = false;
-
 
   this.move = function () {
     canvas.addEventListener("mousemove", function (e) {
@@ -110,7 +108,20 @@ function EnemyTop(speed) {
         newDot.dotTop + 10 > this.newEnemy.offsetTop) {
 
         this.newEnemy.remove();
-        newDot.lifes--;
+        if (newDot.lifes > 0) {
+          if (!newDot.boost) { newDot.lifes--; }
+          life.innerHTML = newDot.lifes;
+        }
+
+        if (newDot.lifes == 0) {
+          lose.classList.remove("desactivate");
+          startBackground.classList.remove("desactivate");
+          dot.classList.add("desactivate");
+          newDot = null;
+          loseButton.addEventListener("click", function () {
+            location.reload()
+          })
+        };
       }
 
       this.top += 2
@@ -163,6 +174,7 @@ function EnemyRight(speed) {
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
+          newDot = null;
           loseButton.addEventListener("click", function () {
             location.reload()
           })
@@ -298,10 +310,12 @@ function greenLife() {
 
 function blueShield() {
   newDot.dot.classList.add("dotblue");
+  newDot.boost = true;
   //newDot = false;
   //newDot.move();
   timerShield = setTimeout(function () {
     newDot.dot.classList.remove("dotblue")
+    newDot.boost = false;
     // newDot = true;
   }, 4000)
 }

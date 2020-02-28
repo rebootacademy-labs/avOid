@@ -1,9 +1,9 @@
 * {
     margin: 0px;
-    font-family: "Quicksand", sans-serif; 
+    font-family: "Quicksand", sans-serif;
 }
 body {
-    background-color: #202020; 
+    background-color: #202020;
     background-size: cover;
     /*background-image: url(https://drive.google.com/file/d/1TqtTb5VjLyrh0AG5WYDnXzJIJkKk5iwo/preview)*/
 }
@@ -39,7 +39,7 @@ header li {
     margin-right: 10%;
     margin-top: 5%;
     cursor: crosshair;
-    
+
 }
 #personaje {
     position: absolute;
@@ -105,7 +105,7 @@ header li {
     height: 40px;
     background-color: rgba(255, 255, 255, 0.1);
     text-align: right;
-  
+
 }
 #timer * {
     display: inline-block;
@@ -128,28 +128,36 @@ header li {
 #start {
     color: lightgray;
     font-size: 5vh;
-    background-color: transparent;
+    background-color: rgba(130, 0, 0, 0.5);
     border: 1px solid rgb(255, 0, 0);
     border-radius: 4%;
     padding: 10px 60px;
-    margin-top: 250px;
     transition: all 1s ease;
+    z-index: 10000;
+    position: absolute;
+    left: 380px;
+    top: 250px;
 }
 #lose {
     color: lightgray;
     font-size: 5vh;
-    background-color: transparent;
+    background-color: rgba(0,0,0, 0.5);
     border: 1px solid rgb(255, 0, 0);
     border-radius: 4%;
     padding: 10px 60px;
-    margin-top: 250px;
     transition: all 1s ease;
-    
+    position: absolute;
+    z-index: 10000;
+    left: 320px;
+    top: 250px;
 }
-button:hover{
-    cursor: pointer;
-    background-color: red;
-    color: black;
+
+#lose:hover,
+#start:hover
+{
+  cursor: pointer;
+  background-color: red;
+  color: black;
 }
 .desactivate {
     display:none;
