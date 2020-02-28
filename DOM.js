@@ -1,5 +1,16 @@
 var newDot = null;
 
+document.addEventListener('keypress', playKey);
+function playKey(p) {
+  music();
+}
+/*
+document.addEventListener('keypress', playKey);
+function playKey(i) {
+  //debugger
+}*/
+var timerSeconds;
+var timerLevel;
 startButton.addEventListener("click", function () {
   //newDot = true;
   newDot = new MainDot(canvas, dot);
@@ -8,16 +19,15 @@ startButton.addEventListener("click", function () {
   startBackground.classList.add("desactivate");
   startButton.classList.add("desactivate");
 
-  music();
   dot.classList.remove("desactivate");
   wrapper.classList.remove("desactivate");
   timerInfo.classList.remove("desactivate");
 
 
-  var timerSeconds = setInterval(() => {
+  timerSeconds = setInterval(() => {
     setTime();
   }, 10);
-  var timerLevel = setInterval(() => {
+  timerLevel = setInterval(() => {
     setLevel();
   }, 1000)
 })
@@ -35,9 +45,9 @@ var dotsGeneration = function (myLevel) {
 timerId = dotsGeneration(actualLevel);
 
 var randomColorBoost = setInterval((() => {
-  var boostTop = new BoostTop(["green", "blue", "purple"]);
+  var boostTop = new BoostTop(["green", "blue"]);
   boostTop.move(newDot);
 
-  var boostRight = new BoostRight(["green", "blue", "purple"]);
+  var boostRight = new BoostRight(["green", "blue"]);
   boostRight.move(newDot);
 }), 5000);
