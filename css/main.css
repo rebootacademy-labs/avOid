@@ -3,7 +3,9 @@
     font-family: "Quicksand", sans-serif; 
 }
 body {
-    background-color: #202020;
+    background-color: #202020; 
+    background-size: cover;
+    /*background-image: url(https://drive.google.com/file/d/1TqtTb5VjLyrh0AG5WYDnXzJIJkKk5iwo/preview)*/
 }
 header{
     float: left;
@@ -31,7 +33,8 @@ header li {
     position: relative;
     width: 1000px;
     height: 600px;
-    background-color: #111111;
+    background-color: #0c0c0c;
+    /*background-color: transparent;*/
     border: 12px solid #333333;
     margin-right: 10%;
     margin-top: 5%;
@@ -40,12 +43,10 @@ header li {
 }
 #personaje {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background-color: lightgray;
     border-radius: 100%;
-    top:293px;
-    left:493px;
 }
 .enemy{
     position: absolute;
@@ -54,20 +55,68 @@ header li {
     border-radius: 100%;
     background-color: red;
 }
+.green{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: rgb(30, 133, 98);
+}
+.blue{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: rgb(47, 119, 148);
+}
+.dotblue{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: lightgray;
+    border: 10px solid rgba(47, 119, 148, 0.911);
+    border-radius: 100%;
+}
+.purple{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: rgb(49, 5, 75);
+}
+.dotpurple{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: lightgray;
+    border:50px solid   rgb(49, 5, 75);
+    border-radius: 100%;
+}
+.orange{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: rgb(255, 140, 73);
+}
 #timer{
     position: absolute;
     width: 100%;
-    height: 30px;
+    height: 40px;
     background-color: rgba(255, 255, 255, 0.1);
     text-align: right;
   
 }
 #timer * {
     display: inline-block;
-    line-height: 30px;
+    line-height: 40px;
     font-size: x-large;
     color: lightgray;
     margin: 0px 10px;
+}
+#time {
+    width: 10%;
+    margin-right: 40px;
 }
 #menu {
     position: absolute;
@@ -109,5 +158,4 @@ header li {
 }
 .desactivate {
     display:none;
-    transition: all 10s ease;
 }
