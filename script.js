@@ -23,12 +23,13 @@ function setLevel() {
   level.innerHTML = actualLevel;
 
 }
+
 function setTime() {
   totalSeconds++;
   time.innerHTML = totalSeconds;
 }
 
-function music (){
+function music() {
   var startAudio = new Audio("./music/background-sound")
   startAudio.loop = true;
   startAudio.play();
@@ -45,7 +46,6 @@ function MainDot(canvas, dot) {
   this.dotBottom;
   this.lifes = 3;
   this.onGame = false;
-
 
 
   this.move = function () {
@@ -84,6 +84,7 @@ function MainDot(canvas, dot) {
     }.bind(this))
   }
 }
+
 function EnemyTop(speed) {
   this.actualLevel = actualLevel;
   this.speed = speed;
@@ -100,30 +101,16 @@ function EnemyTop(speed) {
     this.newEnemy.style.top = `${this.top}px`;
     this.newEnemy.style.left = `${this.left}px`;
 
-
     var intervalChange = this.speed - (this.actualLevel + 6);
 
-
     let movement = setInterval(function () {
-      if (newDot.dotLeft < this.newEnemy.offsetLeft + 6 &&
+      if (newDot && newDot.dotLeft < this.newEnemy.offsetLeft + 6 &&
         newDot.dotTop < this.newEnemy.offsetTop + 6 &&
         newDot.dotLeft + 10 > this.newEnemy.offsetLeft &&
         newDot.dotTop + 10 > this.newEnemy.offsetTop) {
 
         this.newEnemy.remove();
-        if (newDot.lifes > 0) {
-          newDot.lifes--;
-          life.innerHTML = newDot.lifes;
-        }
-
-        if (newDot.lifes == 0) {
-          lose.classList.remove("desactivate");
-          startBackground.classList.remove("desactivate");
-          dot.classList.add("desactivate");
-          loseButton.addEventListener("click", function () {
-            location.reload()
-          })
-        };
+        newDot.lifes--;
       }
 
       this.top += 2
@@ -138,6 +125,7 @@ function EnemyTop(speed) {
     }.bind(this), intervalChange);
   }
 }
+
 function EnemyRight(speed) {
   this.actualLevel = actualLevel;
   this.speed = speed;
@@ -159,7 +147,8 @@ function EnemyRight(speed) {
     var intervalChange = this.speed - (this.actualLevel + 6);
 
     let movement = setInterval(function () {
-      if (newDot.dotLeft < this.newEnemy.offsetLeft + 6 &&
+      if (newDot &&
+        newDot.dotLeft < this.newEnemy.offsetLeft + 6 &&
         newDot.dotTop < this.newEnemy.offsetTop + 6 &&
         newDot.dotLeft + 10 > this.newEnemy.offsetLeft &&
         newDot.dotTop + 10 > this.newEnemy.offsetTop) {
@@ -211,7 +200,8 @@ function BoostTop(colors) {
     this.newBoost.style.left = `${this.left}px`;
 
     let movement = setInterval(function () {
-      if (newDot.dotLeft < this.newBoost.offsetLeft + 18 &&
+      if (newDot &&
+        newDot.dotLeft < this.newBoost.offsetLeft + 18 &&
         newDot.dotTop < this.newBoost.offsetTop + 18 &&
         newDot.dotLeft + 10 > this.newBoost.offsetLeft &&
         newDot.dotTop + 10 > this.newBoost.offsetTop) {
@@ -223,7 +213,7 @@ function BoostTop(colors) {
         if (this.newBoost.classList == "blue") {
           blueShield();
         }
-        if(this.newBoost.classList == "purple"){
+        if (this.newBoost.classList == "purple") {
           purpleGravity();
         }
         /*
@@ -245,6 +235,7 @@ function BoostTop(colors) {
     }.bind(this), 10);
   }
 }
+
 function BoostRight(colors) {
   this.colors = colors;
   this.top = Math.ceil(Math.random() * 600);
@@ -262,7 +253,7 @@ function BoostRight(colors) {
     this.newBoost.style.left = `${this.left}px`;
 
     let movement = setInterval(function () {
-      if (newDot.dotLeft < this.newBoost.offsetLeft + 18 &&
+      if (newDot && newDot.dotLeft < this.newBoost.offsetLeft + 18 &&
         newDot.dotTop < this.newBoost.offsetTop + 18 &&
         newDot.dotLeft + 10 > this.newBoost.offsetLeft &&
         newDot.dotTop + 10 > this.newBoost.offsetTop) {
@@ -274,8 +265,8 @@ function BoostRight(colors) {
         if (this.newBoost.classList == "blue") {
           blueShield();
         }
-        
-        if(this.newBoost.classList == "purple"){
+
+        if (this.newBoost.classList == "purple") {
           purpleGravity();
         }
         /*
@@ -311,17 +302,17 @@ function blueShield() {
   //newDot.move();
   timerShield = setTimeout(function () {
     newDot.dot.classList.remove("dotblue")
-  // newDot = true;
+    // newDot = true;
   }, 4000)
 }
 
 function purpleGravity() {
   newDot.dot.classList.add("dotpurple");
 
- // newDot = false;
+  // newDot = false;
   //newDot.move();
   timerShield = setTimeout(function () {
     newDot.dot.classList.remove("dotpurple")
-  //  newDot = true;
+    //  newDot = true;
   }, 6000)
 }

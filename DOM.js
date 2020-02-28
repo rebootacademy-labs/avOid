@@ -1,7 +1,10 @@
+var newDot = null;
 
 startButton.addEventListener("click", function () {
   //newDot = true;
-  
+  newDot = new MainDot(canvas, dot);
+  newDot.move();
+
   startBackground.classList.add("desactivate");
   startButton.classList.add("desactivate");
 
@@ -19,8 +22,6 @@ startButton.addEventListener("click", function () {
   }, 15000)
 })
 
-var newDot = new MainDot(canvas, dot);
-newDot.move();
 //newDot = false;
 
 var dotsGeneration = function (myLevel) {
@@ -28,6 +29,7 @@ var dotsGeneration = function (myLevel) {
   return enemyGenerator = setInterval(function () {
     var enemyDotTop = new EnemyTop(20)
     enemyDotTop.move(newDot)
+
     var enemyDotRight = new EnemyRight(20);
     enemyDotRight.move(newDot);
   }, intervalGenerator);
@@ -41,8 +43,3 @@ var randomColorBoost = setInterval((() => {
   var boostRight = new BoostRight(["green", "blue", "purple"]);
   boostRight.move(newDot);
 }), 5000);
-
-
-
-
-
