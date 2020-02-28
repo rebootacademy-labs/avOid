@@ -1,13 +1,11 @@
 
-var playMusic = document.getElementById("my_audio");
-playMusic.addEventListener('keydown', (p) => {
-})
-
 startButton.addEventListener("click", function () {
   //newDot = true;
+  
   startBackground.classList.add("desactivate");
   startButton.classList.add("desactivate");
 
+  music();
   dot.classList.remove("desactivate");
   wrapper.classList.remove("desactivate");
   timerInfo.classList.remove("desactivate");

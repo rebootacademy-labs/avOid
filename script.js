@@ -28,6 +28,12 @@ function setTime() {
   time.innerHTML = totalSeconds;
 }
 
+function music (){
+  var startAudio = new Audio("./music/background-sound")
+  startAudio.loop = true;
+  startAudio.play();
+}
+
 function MainDot(canvas, dot) {
   this.actualLevel = actualLevel;
   this.dot = dot;
