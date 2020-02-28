@@ -17,7 +17,7 @@ function setLevel() {
   clearInterval(timerId);
   timerId = dotsGeneration(actualLevel);
 
-  if (actualLevel == 10) {
+  if (actualLevel > 10) {
     this.actualLevel = 10;
   }
   level.innerHTML = actualLevel;
