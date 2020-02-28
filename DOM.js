@@ -29,7 +29,7 @@ startButton.addEventListener("click", function () {
   }, 10);
   timerLevel = setInterval(() => {
     setLevel();
-  }, 6000)
+  }, 4000)
 })
 
 var dotsGeneration = function (myLevel) {
