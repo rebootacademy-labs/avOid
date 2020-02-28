@@ -30,7 +30,7 @@ function setTime() {
 }
 
 function music() {
-  var startAudio = new Audio("./music/background-sound")
+  var startAudio = new Audio("./music/music.mp3")
   startAudio.loop = true;
   startAudio.play();
 }
