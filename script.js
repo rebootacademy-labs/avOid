@@ -19,7 +19,6 @@ function setLevel() {
 
   if (actualLevel > 10) {
     this.actualLevel = 10;
-    //clearInterval(timerId);
   }
   level.innerHTML = actualLevel;
 
@@ -100,6 +99,7 @@ function MainDot(canvas, dot) {
         clearInterval(timerSeconds);
         clearInterval(timerLevel);
         lose.classList.remove("desactivate");
+        timerInfo.classList.add("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
         //document.getElementById(level).innerHTML = this.actualLevel;
@@ -114,6 +114,7 @@ function MainDot(canvas, dot) {
         clearInterval(timerSeconds);
         clearInterval(timerLevel);
         lose.classList.remove("desactivate");
+        timerInfo.classList.add("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
         loseButton.addEventListener("click", function () {
@@ -164,6 +165,7 @@ function EnemyTop(speed) {
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
+          timerInfo.classList.add("desactivate");
           newDot = null;
           loseButton.addEventListener("click", function () {
             location.reload()
@@ -226,6 +228,7 @@ function EnemyRight(speed) {
           clearInterval(timerLevel);
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
+          timerInfo.classList.add("desactivate");
           newDot = null;
           loseButton.addEventListener("click", function () {
             location.reload()
