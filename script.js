@@ -63,6 +63,7 @@ function MainDot(canvas, dot) {
 
       if (this.dotLeft <= 0 || this.dotRight >= 1000) {
         lose.classList.remove("desactivate");
+        timerInfo.classList.add("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
 
@@ -73,6 +74,7 @@ function MainDot(canvas, dot) {
       }
       if (this.dotTop <= 0 || this.dotBottom >= 600) {
         lose.classList.remove("desactivate");
+        timerInfo.classList.add("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
         loseButton.addEventListener("click", function () {
@@ -117,6 +119,7 @@ function EnemyTop(speed) {
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
+          timerInfo.classList.add("desactivate");
           newDot = null;
           loseButton.addEventListener("click", function () {
             location.reload()
@@ -174,6 +177,7 @@ function EnemyRight(speed) {
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
+          timerInfo.classList.add("desactivate");
           newDot = null;
           loseButton.addEventListener("click", function () {
             location.reload()
