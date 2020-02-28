@@ -29,11 +29,11 @@ startButton.addEventListener("click", function () {
   }, 10);
   timerLevel = setInterval(() => {
     setLevel();
-  }, 10000)
+  }, 6000)
 })
 
 var dotsGeneration = function (myLevel) {
-  var intervalGenerator = 200 - (myLevel * 15);
+  var intervalGenerator = 250 - (myLevel * 15);
   return enemyGenerator = setInterval(function () {
     var enemyDotTop = new EnemyTop(20)
     enemyDotTop.move(newDot)
