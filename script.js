@@ -97,11 +97,12 @@ function MainDot(canvas, dot) {
         loseSound();
         this.lifes = 0;
         life.innerHTML = this.lifes;
+        clearInterval(timerSeconds);
+        clearInterval(timerLevel);
         lose.classList.remove("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
-
-        document.getElementById(level).innerHTML = this.actualLevel;
+        //document.getElementById(level).innerHTML = this.actualLevel;
         loseButton.addEventListener("click", function () {
           location.reload()
         })
@@ -110,6 +111,8 @@ function MainDot(canvas, dot) {
         loseSound();
         this.lifes = 0;
         life.innerHTML = this.lifes;
+        clearInterval(timerSeconds);
+        clearInterval(timerLevel);
         lose.classList.remove("desactivate");
         startBackground.classList.remove("desactivate");
         dot.classList.add("desactivate");
@@ -156,8 +159,8 @@ function EnemyTop(speed) {
 
         if (newDot.lifes == 0) {
           loseSound();
-          totalSeconds = clearInterval(totalSeconds);
-    
+          clearInterval(timerSeconds);
+          clearInterval(timerLevel);
           lose.classList.remove("desactivate");
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
@@ -219,6 +222,8 @@ function EnemyRight(speed) {
         if (newDot.lifes == 0) {
           loseSound();
           lose.classList.remove("desactivate");
+          clearInterval(timerSeconds);
+          clearInterval(timerLevel);
           startBackground.classList.remove("desactivate");
           dot.classList.add("desactivate");
           newDot = null;

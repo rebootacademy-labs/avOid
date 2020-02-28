@@ -1,6 +1,16 @@
 var newDot = null;
 
-music();
+document.addEventListener('keypress', playKey);
+function playKey(p) {
+  music();
+}
+/*
+document.addEventListener('keypress', playKey);
+function playKey(i) {
+  //debugger
+}*/
+var timerSeconds;
+var timerLevel;
 startButton.addEventListener("click", function () {
   //newDot = true;
   newDot = new MainDot(canvas, dot);
@@ -14,12 +24,12 @@ startButton.addEventListener("click", function () {
   timerInfo.classList.remove("desactivate");
 
 
-  var timerSeconds = setInterval(() => {
+  timerSeconds = setInterval(() => {
     setTime();
   }, 10);
-  var timerLevel = setInterval(() => {
+  timerLevel = setInterval(() => {
     setLevel();
-  }, 15000)
+  }, 1000)
 })
 
 var dotsGeneration = function (myLevel) {
